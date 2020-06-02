@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'index.css'%}">
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script>
+    <title  >サブりん</title>
+    
+  </head>
+  <body>
+      <header>
+        <h1>サブりん</h1>
+        
+      </header>
+      <main>
+          <div class='container'>
+              {% for item in items %}
+              <div class='onesubsc'>
+                  <div class='top'>
+                    <p class='top-left'></p>
+                    <p class='top-right'>{{item.price}}</p>
+                  </div>     
+                  <div class='middle'>{{item.title}}</div>
+                  <div class='bottom'>
+                    <p class='bottom-left'>{{item.period}}</p>
+                    <a class='bottom-right' href="../delete/{{item.id}}"><i class="fas fa-trash-alt"></i></a>
+                  </div>
+                  
+              </div>
+              {% endfor %}
+              
+              <div class="message">
+                <p>合計{{prices}}</p>
+                <div>
+                  <a href="../newone" class="regibutton">新規登録</a>
+                </div>
+                  
+              </div>
+          </div>
+          <div>
+            <h1>おすすめサブスクリプション</h1>
+            <div class="rec-img"></div>
+          </div>
+
+          
+
+
+      </main>
+      <footer>
+        <p>サブスクの管理で家計に革命を</p>
+        <p>Make ends meet with SubRin...</p>
+      </footer>
+      {{ recs|json_script:"recs" }}
+      <script type="text/javascript" src="{% static 'index.js' %}">
+  </body>
+</html>
