@@ -14,6 +14,11 @@
   <body>
       <header>
         <h1>サブりん</h1>
+        {{test}}
+        <a href="../../index/All">All</a>
+        {% for category in categories %}
+        <a href="../../index/{{category}}">{{category}}</a>
+        {% endfor %}
         
       </header>
       <main>
@@ -21,13 +26,13 @@
               {% for item in items %}
               <div class='onesubsc'>
                   <div class='top'>
-                    <p class='top-left'></p>
+                    <p class='top-left'>{{item.dateleft}}</p>
                     <p class='top-right'>{{item.price}}</p>
                   </div>     
                   <div class='middle'>{{item.title}}</div>
                   <div class='bottom'>
                     <p class='bottom-left'>{{item.period}}</p>
-                    <a class='bottom-right' href="../delete/{{item.id}}"><i class="fas fa-trash-alt"></i></a>
+                    <a class='bottom-right' href="../../delete/{{item.id}}"><i class="fas fa-trash-alt"></i></a>
                   </div>
                   
               </div>
@@ -36,7 +41,7 @@
               <div class="message">
                 <p>合計{{prices}}</p>
                 <div>
-                  <a href="../newone" class="regibutton">新規登録</a>
+                  <a href="../../newone" class="regibutton">新規登録</a>
                 </div>
                   
               </div>
@@ -55,6 +60,6 @@
         <p>Make ends meet with SubRin...</p>
       </footer>
       {{ recs|json_script:"recs" }}
-      <script type="text/javascript" src="{% static 'index.js' %}">
+      <script type="text/javascript" src="{% static 'index.js' %}"></script>
   </body>
 </html>

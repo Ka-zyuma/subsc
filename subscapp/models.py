@@ -10,6 +10,8 @@ class Subsc(models.Model):
     date = models.DateField(default=timezone.now)
     period = models.IntegerField(default = 0)
     category = models.CharField(max_length=100,choices = cate,default=('Music'))
+    dateleft = models.IntegerField(default=0)
+
 
 
     def __str__(self):

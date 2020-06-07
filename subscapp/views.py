@@ -4,29 +4,43 @@ from django.views.generic import CreateView
 from django.urls import reverse_lazy
 from django.db.models import Sum
 from datetime import date
+import datetime
 import random
 from django.contrib import messages
+from dateutil.relativedelta import relativedelta
 # Create your views here.
-def index(request):
-    items = Subsc.objects.all().filter(category='Movie')
+def index(request,cate):
+    if cate=='All':
+        items = Subsc.objects.all()
+    else:
+        items = Subsc.objects.all().filter(category=cate)
+    categories = Subsc.objects.values_list('category',flat='True').distinct()
+    #vaules_listで特定のfieldsだけを取得
+    #distinct()で重複を削除
+
     s = 0
-    prices = Subsc.objects.all()
+    prices = items
     for price in prices:
         s += price.price
-    for day in items:
-        x1 = date.today() - day.date
-        day.period = x1.days
-        day.save()
-    recs = random.choice(("https://www.google.com/imgres?imgurl=http%3A%2F%2Fwww.scdn.co%2Fi%2F_global%2Fopen-graph-default.png&imgrefurl=https%3A%2F%2Fwww.spotify.com%2Fjp%2F&tbnid=EJxAr9DvxZhERM&vet=12ahUKEwi-t8yjzdvpAhWFy4sBHSPqC9IQMygBegUIARDrAQ..i&docid=0aq1zU_Mlei_QM&w=1200&h=630&q=spotify&ved=2ahUKEwi-t8yjzdvpAhWFy4sBHSPqC9IQMygBegUIARDrAQ","https://www.google.com/imgres?imgurl=https%3A%2F%2Fcdn-ak.f.st-hatena.com%2Fimages%2Ffotolife%2Fy%2Fyui-papa1214%2F20200210%2F20200210192300.jpg&imgrefurl=https%3A%2F%2Fwww.yui-papa.com%2Fentry%2F2020%2F02%2F10%2F191018&tbnid=_7netLRSSoHe3M&vet=12ahUKEwjCodG6zdvpAhXDAqYKHfOoBk4QMygCegUIARDsAQ..i&docid=6juITzpCEdxI6M&w=719&h=295&q=youtube%20premium&ved=2ahUKEwjCodG6zdvpAhXDAqYKHfOoBk4QMygCegUIARDsAQ"))
+    for item in items:
+        x1 = date.today() - item.date
+        item.period = x1.days
+        x2 = item.date + relativedelta(months=1) - date.today()
+        #日数の計算はdatetime、timedelta,relativedeltなどで行う
+        item.dateleft = x2.days
+        item.save()
+    
+    
+    recs = random.choice(("https://www.phileweb.com/news/ogp/d-av/456/45657.jpg","https://parentzone.org.uk/sites/default/files/580b57fcd9996e24bc43c529.png"))
 
-    return render(request, 'index.html',{'items':items,'prices':s,'recs':recs})
+    return render(request, 'index.html',{'items':items,'prices':s,'recs':recs,'categories':categories})
     
 
 
 class newone(CreateView):
     template_name='newone.html'
     model = Subsc
-    fields = {'title','price','url','category'}
+    fields = {'title','price','url','category','date'}
     success_url = reverse_lazy('index')
     
 def message(request,pk):

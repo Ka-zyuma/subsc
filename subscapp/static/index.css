@@ -58,7 +58,9 @@ footer p{ text-align:center;
 }
 .top-left{
     float:left;
-
+    margin:0px;
+    line-height: 50px;
+    font-size:40px;
 }
 .top-right{
     float:right;
@@ -71,7 +73,6 @@ footer p{ text-align:center;
     vertical-align: bottom;
     line-height:50px;
     font-size:40px;
-
 }
 .bottom-right{
     float:right;
@@ -110,6 +111,7 @@ footer p{ text-align:center;
       border:1px black solid;
       display:inline-block;
       margin:0 auto;
+      background-size: cover;
   }
   .rec{ 
     text-align:center;

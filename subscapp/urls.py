@@ -3,10 +3,10 @@ from . import views
 from .views import newone
 
 urlpatterns = [
-    path('index/',views.index, name='index'),
+    path('index/<str:cate>/',views.index, name='index'),
     path('newone/',newone.as_view(), name='newone'),
-    path('delete/<int:pk>', views.delete, name='delete'),
-    path('message/<int:pk>',views.message,name="message"),
+    path('delete/<int:pk>/', views.delete, name='delete'),
+    path('message/<int:pk>/',views.message,name="message"),
 ]
 
 
