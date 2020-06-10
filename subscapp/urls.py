@@ -1,12 +1,16 @@
 from django.urls import path 
 from . import views
-from .views import newone
 
 urlpatterns = [
-    path('index/<str:cate>/',views.index, name='index'),
-    path('newone/',newone.as_view(), name='newone'),
+    path('',views.top, name='top'),
+    path('index/All/',views.indexAll, name='index'),
+    path('index/<str:cate>/',views.index),
+    path('newone/',views.new, name='new'),
     path('delete/<int:pk>/', views.delete, name='delete'),
     path('message/<int:pk>/',views.message,name="message"),
+    path('signup/',views.signupfunc, name='signup' ),
+    path('login/',views.loginfunc, name='login'),
+    path('logout',views.logoutfunc, name='logout'),
 ]
 
 

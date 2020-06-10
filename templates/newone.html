@@ -1,28 +1,28 @@
-
+{% extends 'base.html' %}
 {% load static %}
 
+{% block customcss %}
+<link rel="stylesheet" href="{% static 'newone.css' %}">
+{% endblock customcss %}
 
-<!DOCTYPE html>
-<html lang="ja">
-  <head>
-    <meta charset="UTF-8">
-    <title>サブりん</title>
-    <link rel="stylesheet" href="{% static 'newone.css' %}">
-  </head>
-  <body>
-      <header>
+{% block content %}
+<form method="POST" action="">{% csrf_token %}
+  <p>title<input type="text" name='title'></p>
+  <p>url<input type="url" name='url'></p>
+  <p>category
+    <select name="category">
+      <option name='category' value="Music">Music</option>
+      <option name='category' value="Book">Book</option>
+      <option name='category' value="Movie">Movie</option>
+      <option name='category' value="Morter">Morter</option>
+      <option name='category' value="Others">Others</option>
+    </select>
+  </p>
+  <p>price<input type="number" name='price'></p>
+  <p>date<input type="text" name='date'></p>
+  <input type="hidden" name='username' value='{{ user.username }}'>
 
-      </header>
-      <main>
-        <form method="POST" action="">{% csrf_token %}
-          {{form.as_p}}
-          <input type="submit" value="作成する">
-            
-        </form>
-        
-      </main>
-      <footer>
+  <input type="submit" value="作成する">
 
-      </footer>
-  </body>
-</html>
+</form>
+{% endblock content %}

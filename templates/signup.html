@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<label for="username">username</label>
+<form action="" method='POST'>{% csrf_token%}
+    <input type="text" name='username' required>
+    <label for="password">password</label>
+    <input type="password" name='password' required>
+    <button type="submit">sign up</button>
+</form>
+<a href="../login/">loginはこちら</a>
+{%if error%}
+{{error}}
+{%endif%}
+{% endblock content %}

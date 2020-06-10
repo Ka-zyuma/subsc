@@ -11,7 +11,7 @@ class Subsc(models.Model):
     period = models.IntegerField(default = 0)
     category = models.CharField(max_length=100,choices = cate,default=('Music'))
     dateleft = models.IntegerField(default=0)
-
+    username = models.CharField(max_length=100,default=('akashikazuma'))
 
 
     def __str__(self):
